@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    body{
+        font-family: Poppins, sans-serif;
+        background-image: url("login background.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    h1{
+        margin-top: 50px;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: black;
+    }
+
+    .box{
+        background: rgba(255,255,255,0.85);
+        width: 380px;
+        margin: 40px auto;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    input{
+        width: 90%;
+        padding: 14px;
+        margin: 10px 0;
+        border-radius: 12px;
+        border: 1px solid gray;
+        font-size: 1rem;
+    }
+
+    button{
+        padding: 14px 30px;
+        background: #ff7da6;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        margin-top: 10px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover{
+        background: #ff5c8c;
+        transform: scale(1.03);
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+</style>
+</head>
+
+<body>
+
+<h1>Login</h1>
+
+<div class="box">
+
+    <input id="user" placeholder="Username">
+    <input id="pass" type="password" placeholder="Password">
+
+    <button onclick="loginUser()">Login</button>
+
+    <p style="margin-top: 14px; color:#333; font-size: 1rem;">
+        New user?  
+        <a href="register.html" style="color:#ff5c8c; font-weight:600;">
+            Create an account
+        </a>
+    </p>
+
+</div>
+
+<script>
+
+function loginUser(){
+    let u = document.getElementById("user").value;
+    let p = document.getElementById("pass").value;
+
+    let data = JSON.parse(localStorage.getItem("userProfile"));
+
+    if(!data){
+        alert("No user registered yet! Please register first.");
+        return;
+    }
+
+    if(data.username === u && data.password === p){
+        localStorage.setItem("loggedInUser", data.username);
+        alert("Login Successful!");
+        window.location.href = "dashboard.html";
+    } 
+    else {
+        alert("Incorrect username or password");
+    }
+}
+
+</script>
+
+</body>
+</html>

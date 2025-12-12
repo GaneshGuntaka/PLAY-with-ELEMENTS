@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PLAY with ELEMENTS</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        /* TITLE */
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 700; /* bold professional font */
+            margin-bottom: 25px;
+            color: #2c2c2c;
+        }
+
+        /* IMAGE */
+        header img {
+            width: 350px;
+            margin-bottom: 25px; 
+        }
+
+        /* PLAY BUTTON */
+        #playBtn {
+            padding: 15px 45px;
+            background-color: #ff7da6;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #playBtn:hover {
+            background-color: #ff5c8c;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TITLE FIRST -->
+    <h1>PLAY with ELEMENTS</h1>
+
+    <!-- IMAGE SECOND -->
+    <header>
+        <img src="header image.jpg" alt="Header Image" />
+    </header>
+
+    <!-- BUTTON THIRD -->
+    <button id="playBtn" onclick="openUserPrompt()">PLAY</button>
+
+    <script>
+        function openUserPrompt() {
+            let choice = confirm("Are you an existing user? Click OK for YES, Cancel for NEW user.");
+            if (choice) {
+                window.location.href = "login.html";
+            } else {
+                window.location.href = "register.html";
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Register - PLAY with ELEMENTS</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      background-image: url("login background.jpg");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: start;
+      justify-content: center;
+      padding-top: 48px;
+      color: #2c2c2c;
+    }
+
+    .card {
+      width: 360px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+
+    h1 { margin: 0 0 12px 0; font-size: 1.8rem; font-weight:700; }
+    p.sub { color: #7a6b73; margin: 0 0 18px 0; }
+
+    .field {
+      width: 100%;
+      margin: 8px 0;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"]{
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #cfc7c9;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .actions {
+      margin-top: 14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:center;
+    }
+
+    .btn {
+      background: linear-gradient(180deg,#ff7da6,#ff5c8c);
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 70%;
+    }
+
+    .link {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: #333;
+    }
+    .link a { color: #ff5c8c; font-weight:600; text-decoration:none; }
+
+    .error {
+      color: #b00020;
+      font-size: 0.9rem;
+      margin-top: 6px;
+      display:none;
+    }
+
+    @media (max-width:420px){
+      .card { width: 92%; padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" role="main" aria-labelledby="regTitle">
+    <h1 id="regTitle">Create Account</h1>
+    <p class="sub">Join PLAY with ELEMENTS — it's free and fun!</p>
+
+    <div class="field">
+      <input id="fullName" type="text" placeholder="Full name" autocomplete="name" />
+    </div>
+    <div class="field">
+      <input id="username" type="text" placeholder="Username" autocomplete="username" />
+    </div>
+    <div class="field">
+      <input id="email" type="email" placeholder="Email (optional)" autocomplete="email" />
+    </div>
+    <div class="field">
+      <input id="password" type="password" placeholder="Password" autocomplete="new-password" />
+    </div>
+    <div class="field">
+      <input id="confirmPassword" type="password" placeholder="Confirm password" autocomplete="new-password" />
+    </div>
+
+    <div id="error" class="error"></div>
+
+    <div class="actions">
+      <!-- type="button" prevents accidental form-submit/reload -->
+      <button class="btn" type="button" onclick="registerUser()">Register</button>
+
+      <div class="link">
+        Already registered?
+        <a href="login.html">Login here</a>
+      </div>
+    </div>
+  </div>
+
+<script>
+  function showError(msg){
+    const el = document.getElementById('error');
+    el.style.display = msg ? 'block' : 'none';
+    el.textContent = msg || '';
+  }
+
+  function registerUser(){
+    showError(''); // clear previous
+
+    const name = document.getElementById('fullName').value.trim();
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const confirm = document.getElementById('confirmPassword').value;
+
+    // basic validation
+    if(!name) { showError('Please enter your full name.'); return; }
+    if(!username) { showError('Please choose a username.'); return; }
+    if(!password) { showError('Please enter a password.'); return; }
+    if(password !== confirm) { showError('Passwords do not match.'); return; }
+
+    // (Optional) check existing user and warn — currently we keep single-profile behavior
+    const existing = localStorage.getItem('userProfile');
+    if(existing){
+      // if you want to disallow overwriting, uncomment next lines
+      // if(confirm('A user is already registered in this browser. Overwrite?') === false) return;
+      // We will overwrite by default (keeps login logic simple).
+    }
+
+    // store user profile (simple; no backend; do NOT store real passwords in production)
+    const profile = {
+      name,
+      username,
+      email,
+      password
+    };
+
+    localStorage.setItem('userProfile', JSON.stringify(profile));
+
+    // success
+    alert('Registration Successful! Please login now.');
+    // redirect to login page
+    window.location.href = 'login.html';
+  }
+
+  // allow pressing Enter on inputs to submit
+  document.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter') registerUser();
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+<style>
+body{
+    font-family: Poppins, sans-serif;
+    text-align:center;
+    padding-top: 40px;
+}
+button{
+    padding: 15px 30px;
+    margin: 15px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border:none;
+    background: #ff7da6;
+    color: white;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Welcome to PLAY with ELEMENTS</h1>
+<h3 id="uname"></h3>
+
+<button onclick="location.href='periodic.html'">View Periodic Table</button>
+<button onclick="location.href='playmenu.html'">Play With Elements</button>
+
+<script>
+let user = JSON.parse(localStorage.getItem("userProfile"));
+uname.innerText = "Hello, " + user.name;
+</script>
+
+</body>
+</html>
